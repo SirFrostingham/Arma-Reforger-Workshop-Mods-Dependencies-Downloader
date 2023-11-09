@@ -46,6 +46,10 @@ if ($match.Success) {
 
     # Output the collection of "id" and "name" pairs
     $idNamePairs | ConvertTo-Json
+
+    # Output Scenario ID
+    $scenarioId = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameId
+    Write-Host "Scenario ID: $scenarioId"
 } else {
     Write-Host "JSON data not found on the page."
 }
