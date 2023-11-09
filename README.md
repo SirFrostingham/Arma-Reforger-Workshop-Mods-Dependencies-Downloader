@@ -1,5 +1,5 @@
 # Arma-Reforger-Workshop-Mods-Dependencies-Downloader
-This simple project is designed to take the Arma Reforger workshop website and output the parent mod and any/all mod dependencies json to put in your server config.json.
+This simple project is designed to take the Arma Reforger workshop website and output the `parent mod and any/all mod dependencies` json to put in your server config.json. It also outputs the mod's `scenario id` at the bottom.
 
 2 flavors:
 1. Powershell
@@ -22,7 +22,7 @@ It will output the main mod + all dependencies, so you can plug it into your ser
 
 Tool output screenshot (both script outputs are exactly the same):
 
-![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/a27f0b47-0cc5-44f5-a819-2c197e5a4ee8)
+![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/dad03185-edeb-46d0-a3eb-580061d26ad7)
 
 
 Plug in the data to your server's config.json:
