@@ -11,11 +11,12 @@ It will output the main mod + all dependencies, so you can plug it into your ser
 
 Tool output screenshot:
 
-![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/128c6999-4b21-48f4-8613-353f811f4cdf)
+![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/a27f0b47-0cc5-44f5-a819-2c197e5a4ee8)
 
 
 Plug in the data to your server's config.json:
 
-![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/b09718a9-18b9-4fe6-916e-ab417d9e2686)
+![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/5b22c62c-5085-432d-b799-5831fdc58715)
+
 
 Enjoy.
