@@ -30,4 +30,24 @@ Plug in the data to your server's config.json:
 ![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/5b22c62c-5085-432d-b799-5831fdc58715)
 
 
+Troubleshooting:
+If you add the json and the server does not start, look for errors:
+```
+INIT         : Creating game instance(ArmaReforgerScripted), version 0.9.9.104 built 2023-09-22 2:16:53 UTC.
+Loading dedicated server config.
+ BACKEND      : Server config loaded.
+ BACKEND      : JSON Schema Validation:
+  BACKEND      : JSON is Valid
+ RESOURCES    : GetResourceObject @"{9F7BA3BBF4B38A98}Missions/WastelandHeader.conf"
+  RESOURCES (E): Failed to open
+ RESOURCES (E): MissionHeader::ReadMissionHeader cannot load the resource 'Missions/WastelandHeader.conf'!
+ENGINE       : Game successfully created.
+InputManager user settings load from profile @"InputUserSettings.conf"
+ DEFAULT   (W): Loading input settings from legacy file, which will be soon unsupported
+NETWORK      : Starting dedicated server using command line args.
+BACKEND   (E): Http Error apiCode="ResourceNotFoundError", message="Asset '5AF76BA0142BCDDE' not found"
+```
+
+At the time of writing this, the mod `5AF76BA0142BCDDE` returns a 404, which is a dependency of the above "ReforgedWastelandPrototype" workshop item.
+
 Enjoy.
