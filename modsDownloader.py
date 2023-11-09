@@ -36,6 +36,7 @@ def main(url):
 
             # Search for the "dependencies" information
             dependencies = json_data['props']['pageProps']['assetVersionDetail']['dependencies']
+            scenarioId = json_data['props']['pageProps']['assetVersionDetail']['scenarios'][0]['gameId']
 
             # Dependencies: Build a collection of "id" and "name" pairs
             for dep in dependencies:
@@ -47,6 +48,9 @@ def main(url):
 
             # Output the collection of "id" and "name" pairs as JSON
             print(json.dumps(id_name_pairs, indent=4))
+
+            # Output Scenario ID
+            print(f"Scenario ID: {scenarioId}")
         else:
             print("JSON data not found on the page.")
     except requests.exceptions.RequestException as e:
