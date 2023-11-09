@@ -26,7 +26,7 @@ if ($match.Success) {
 
     # Add parent mod to the collection
     $idNamePair = @{
-        "id" = $asset.id
+        "modId" = $asset.id
         "name" = $asset.name
     }
     $idNamePairs += $idNamePair
@@ -38,7 +38,7 @@ if ($match.Success) {
     foreach ($dep in $dependencies) {
         $asset = $dep.asset
         $idNamePair = @{
-            "id" = $asset.id
+            "modId" = $asset.id
             "name" = $asset.name
         }
         $idNamePairs += $idNamePair
