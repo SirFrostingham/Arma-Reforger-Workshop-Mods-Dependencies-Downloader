@@ -20,7 +20,7 @@ Python Instructions:
 Result:
 It will output the main mod + all dependencies, so you can plug it into your server's mods object.
 
-Tool output screenshot:
+Tool output screenshot (both script outputs are exactly the same):
 
 ![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/a27f0b47-0cc5-44f5-a819-2c197e5a4ee8)
 
