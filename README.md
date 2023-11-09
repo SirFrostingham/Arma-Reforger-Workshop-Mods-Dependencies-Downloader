@@ -48,6 +48,6 @@ NETWORK      : Starting dedicated server using command line args.
 BACKEND   (E): Http Error apiCode="ResourceNotFoundError", message="Asset '5AF76BA0142BCDDE' not found"
 ```
 
-At the time of writing this, the mod `5AF76BA0142BCDDE` returns a 404 ResourceNotFoundError, which means a dependency of the "ReforgedWastelandPrototype" workshop item is missing.
+At the time of writing this, the mod `5AF76BA0142BCDDE` (Vergys Military Gear) returns a 404 ResourceNotFoundError, which means a dependency of the "ReforgedWastelandPrototype" workshop item is missing.
 
 Enjoy.
