@@ -22,7 +22,7 @@ It will output the main mod + all dependencies, so you can plug it into your ser
 
 Tool output screenshot (both script outputs are exactly the same):
 
-![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/dad03185-edeb-46d0-a3eb-580061d26ad7)
+[image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/ccae6fc7-bed4-470d-9f7e-c5725deaa1e6)
 
 
 Plug in the data to your server's config.json:
