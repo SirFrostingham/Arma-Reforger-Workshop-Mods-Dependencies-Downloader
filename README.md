@@ -9,13 +9,13 @@ Powershell Instructions:
 1. Prerequisite - Install WebRequest module via CMD: `powershell -command "Install-Module WebRequest" -Scope CurrentUser -AllowClobber`
 2. Download/copy the `modsDownloader.ps1` script to any directory.
 3. Run it like this:
-    ```. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype"```
+    `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype"`
 
 Python Instructions:
 1. Prerequisite: Install python: If in Windows, suggest install chocolatey (https://chocolatey.org/install -> run powershell script under "Now run the following command"), then install python (choco install python3).
 2. Download/copy the `modsDownloader.py` script to any directory.
 3. Run it like this:
-   ```python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype```
+   `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype`
 
 Result:
 It will output the main mod + all dependencies, so you can plug it into your server's mods object.
