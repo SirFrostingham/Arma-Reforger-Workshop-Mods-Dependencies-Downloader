@@ -31,7 +31,7 @@ Plug in the data to your server's config.json:
 
 
 Troubleshooting:
-If you add the json and the server does not start, look for errors:
+If you add the json to your server config.json and the server does not start, look for errors:
 ```
 INIT         : Creating game instance(ArmaReforgerScripted), version 0.9.9.104 built 2023-09-22 2:16:53 UTC.
 Loading dedicated server config.
