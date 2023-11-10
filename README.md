@@ -18,7 +18,7 @@ Python Instructions:
    `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype`
 
 Result:
-It will output the main mod + all dependencies, so you can plug it into your server's mods object.
+It will output the main mod + all dependencies, so you can plug it into your server's mods object. It also outputs the scenario id to add to your config.json file.
 
 Tool output screenshot (both script outputs are exactly the same):
 
