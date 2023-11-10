@@ -8,7 +8,7 @@ This simple project is designed to take the Arma Reforger workshop website and o
 Powershell Instructions:
 1. Prerequisite - Install WebRequest module via CMD: `powershell -command "Install-Module WebRequest" -Scope CurrentUser -AllowClobber`
 2. Download/copy the `modsDownloader.ps1` script to any directory.
-3. Run: CMD
+3. Run: cmd
 4. Run: powershell
 5. Run script:
     `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype"`
