@@ -31,8 +31,8 @@ if ($match.Success) {
         "name" = $asset.name
     }
 
-    if ($version -and $jsonData.props.pageProps.assetVersionDetail.version) {
-        $idNamePair["version"] = $jsonData.props.pageProps.assetVersionDetail.version
+    if ($version -and $asset.currentVersionNumber) {
+        $idNamePair["version"] = $asset.currentVersionNumber
     }
     
     $idNamePairs += $idNamePair
