@@ -34,7 +34,7 @@ def main(url, include_version):
                 "name": asset['name']
             }
             
-            version = json_data['props']['pageProps']['assetVersionDetail'].get('version', None)
+            version = json_data['props']['pageProps']['asset']['currentVersionNumber']
             if include_version and version is not None:
                 parent_mod["version"] = version
             
