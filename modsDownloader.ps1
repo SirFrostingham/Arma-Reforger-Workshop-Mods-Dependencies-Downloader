@@ -1,5 +1,6 @@
 param (
-    [string]$url
+    [string]$url,
+    [switch]$version
 )
 
 if ([string]::IsNullOrEmpty($url)) {
@@ -29,6 +30,11 @@ if ($match.Success) {
         "modId" = $asset.id
         "name" = $asset.name
     }
+
+    if ($version -and $jsonData.props.pageProps.assetVersionDetail.version) {
+        $idNamePair["version"] = $jsonData.props.pageProps.assetVersionDetail.version
+    }
+    
     $idNamePairs += $idNamePair
     
     # Search for the "dependencies" information
@@ -36,20 +42,36 @@ if ($match.Success) {
 
     # Dependencies: Build a collection of "id" and "name" pairs
     foreach ($dep in $dependencies) {
-        $asset = $dep.asset
-        $idNamePair = @{
-            "modId" = $asset.id
-            "name" = $asset.name
+        $depAsset = $dep.asset
+        $depIdNamePair = @{
+            "modId" = $depAsset.id
+            "name" = $depAsset.name
         }
-        $idNamePairs += $idNamePair
+
+        if ($version -and $dep.version) {
+            $depIdNamePair["version"] = $dep.version
+        }
+
+        $idNamePairs += $depIdNamePair
     }
 
     # Output the collection of "id" and "name" pairs
+    Write-Host "Mods list:"
     $idNamePairs | ConvertTo-Json
 
-    # Output Scenario ID
+    # Output scenario details
     $scenarioId = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameId
     Write-Host "Scenario ID: $scenarioId"
+    $gameMode = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameMode
+    Write-Host "Game mode: $gameMode"
+    $playerCount = $jsonData.props.pageProps.assetVersionDetail.scenarios.playerCount
+    Write-Host "Player count: $playerCount"
+
+    # Output version if provided
+    if ($version -and $jsonData.props.pageProps.assetVersionDetail.version) {
+        $version = $jsonData.props.pageProps.assetVersionDetail.version
+        Write-Host "Version: $version"
+    }
 } else {
     Write-Host "JSON data not found on the page."
 }
