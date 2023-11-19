@@ -8,118 +8,84 @@
     "port": 17777
   },
   "game": {
-    "passwordAdmin": "CHANEME123",
-    "name": "[YourServerTag] Server",
+    "passwordAdmin": "CHANGEME",
+    "name": "[SERVER] TITLE",
     "password": "",
-    "scenarioId": "{3C7BD7F8DD7CDCA8}Missions/SurviveArland.conf",
-    "maxPlayers": 127,
+    "scenarioId": "{AC5B1FB5AC7C231F}Missions/Conquest Utes Island.conf",
+    "maxPlayers": 100,
     "visible": true,
-    "admins": [
-      "76561197970982843"
-    ],
+    "crossPlatform": true,
     "supportedPlatforms": [
-      "PLATFORM_PC"
+      "PLATFORM_PC",
+      "PLATFORM_XBL"
     ],
     "gameProperties": {
       "serverMaxViewDistance": 2500,
       "serverMinGrassDistance": 50,
       "networkViewDistance": 1000,
       "disableThirdPerson": false,
-      "fastValidation": false,
-      "battlEye": false,
+      "fastValidation": true,
+      "battlEye": true,
       "VONDisableUI": false,
       "VONDisableDirectSpeechUI": false
     },
     "mods": [
-        {
-            "name":  "SurviveArland",
-            "modId":  "5E26BD8490049CD1"
-        },
-        {
-            "name":  "RHS - Status Quo",
-            "modId":  "595F2BF2F44836FB"
-        },
-        {
-            "name":  "GAU-5 Carbine",
-            "modId":  "59637B20CAA089C9"
-        },
-        {
-            "name":  "AttachmentsCompatibility",
-            "modId":  "597D72161FD1ED1D"
-        },
-        {
-            "name":  "Night Vision System",
-            "modId":  "59A30ACC02650E71"
-        },
-        {
-            "name":  "Vergys Custom Clothing",
-            "modId":  "59B70A5A19E9B51E"
-        },
-        {
-            "name":  "MP5",
-            "modId":  "59CE2049A75C7B38"
-        },
-        {
-            "name":  "Ravage",
-            "modId":  "59D7714FC99182F6"
-        },
-        {
-            "name":  "SFP Reforger",
-            "modId":  "5A9D3BF26139101E"
-        },
-        {
-            "name":  "RIS Laser Attachments",
-            "modId":  "5ABD0CB57F7E9EB1"
-        },
-        {
-            "name":  "Functional Knives",
-            "modId":  "5C6CC278BBBFAA71"
-        },
-        {
-            "name":  "Dogtags",
-            "modId":  "5C7AECFA99A4BF99"
-        },
-        {
-            "name":  "Zeliks Loot Spawners",
-            "modId":  "5C8540DA49BA6AFC"
-        },
-        {
-            "name":  "M110 DMR",
-            "modId":  "5CA125536EE7430A"
-        },
-        {
-            "name":  "Task Force Mattock Uniforms",
-            "modId":  "5CF0C3158AB2337E"
-        },
-        {
-            "name":  "Zeliks Character",
-            "modId":  "5D0551624969C92E"
-        },
-        {
-            "name":  "Vergys Military Gear",
-            "modId":  "5D0D6D55399BA251"
-        },
-        {
-            "name":  "Zeliks Mag Repacking",
-            "modId":  "5DFE2126529E5E39"
-        },
-        {
-            "name":  "Modular Equipment Pack",
-            "modId":  "5E3D67C6D5AE324B"
-        },
-        {
-            "name":  "Modern FIA - Work in progress",
-            "modId":  "5E88D875544B01AB"
-        },
-        {
-            "name":  "Bacon Ravage",
-            "modId":  "5EBF166A4EECEA14"
-        }
+      {
+        "modId": "5EE637B626221E3F",
+        "name": "Conflict 2032 Utes"
+      },
+      {
+        "modId": "5ED681FAE40FA082",
+        "name": "Utes Reforged"
+      },
+      {
+        "modId": "5EE119F531AC5702",
+        "name": "Conflict 2032 Modern Combat En"
+      },
+      {
+        "modId": "595F2BF2F44836FB",
+        "name": "RHS - Status Quo"
+      },
+      {
+        "modId": "5AB301290317994A",
+        "name": "Suppressors"
+      },
+      {
+        "modId": "5ABD0CB57F7E9EB1",
+        "name": "RIS Laser Attachments"
+      },
+      {
+        "modId": "5AF6E0F075D79473",
+        "name": "M249 Scope Rails"
+      },
+      {
+        "modId": "5C721177A220B42F",
+        "name": "Joint Light Tactical Vehicle"
+      },
+      {
+        "modId": "5D1880C4AD410C14",
+        "name": "M1A1 Abrams"
+      },
+      {
+        "modId": "5D596455C6A5DA94",
+        "name": "G3A3 DMR"
+      },
+      {
+        "modId": "5E04C10D824A8990",
+        "name": "M60E4"
+      },
+      {
+        "modId": "5E389BB9F58B79A6",
+        "name": "SpaceCore"
+      },
+      {
+        "modId": "5E4F1725CF7FD63A",
+        "name": "Bacons M249 pkm rpk rails"
+      },
+      {
+        "modId": "5E5C154FEE1094BB",
+        "name": "M113 APC"
+      }
     ]
-  },
-  "operating": {
-    "lobbyPlayerSynchronise": false,
-    "playerSaveTime": 120,
-    "aiLimit": -1
   }
 }
