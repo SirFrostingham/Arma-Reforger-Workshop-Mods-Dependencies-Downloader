@@ -1,11 +1,11 @@
 # Arma-Reforger-Workshop-Mods-Dependencies-Downloader
-This simple project is designed to take the Arma Reforger workshop website and output the `parent mod and any/all mod dependencies` json to put in your server config.json. It also outputs the mod's `scenario id` at the bottom.
+This simple project is designed to take the Arma Reforger workshop website and output the `parent mod and any/all mod dependencies` as json that the game can use.
 
-2 flavors:
+**2 flavors**
 1. Powershell
 2. Python
 
-Powershell Instructions:
+# Powershell Instructions
 1. Prerequisite - Install WebRequest module via CMD: `powershell -command "Install-Module WebRequest" -Scope CurrentUser -AllowClobber`
 2. Download/copy the `modsDownloader.ps1` script to any directory.
 3. Run: cmd
@@ -18,7 +18,7 @@ Powershell Instructions:
    - Output to text file (be sure to delete any previous, since this will append):
         `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true` >> test.json
 
-Python Instructions:
+# Python Instructions
 1. Prerequisite: Install python: If in Windows, suggest install chocolatey (https://chocolatey.org/install -> run powershell script under "Now run the following command"), then install python (choco install python3).
 2. Download/copy the `modsDownloader.py` script to any directory.
 3. **Script usages**:
@@ -29,8 +29,8 @@ Python Instructions:
     - Include mod verison detail (be sure to delete any previous, since this will append):
        `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version` >> test.json
 
-Result:
-It will output the content from the website (main mod + all mod dependencies, Scenario ID, and player count as maxPlayers) to a json format the game can use.
+# Results
+Either script will output the content from the website url (main mod + all mod dependencies, Scenario ID, and player count as maxPlayers) to a json format the game can use.
 
 Tool example screenshot (see Powershell or Python usages above - both scripts output the same exact way):
 
