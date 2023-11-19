@@ -26,7 +26,7 @@ def main(url, include_version):
             asset = json_data['props']['pageProps']['asset']
 
             # Build a collection of "id" and "name" pairs
-            id_name_pairs = set()
+            dep_mods_set = set()
 
             # Add parent mod to the collection
             parent_mod = {
@@ -38,7 +38,7 @@ def main(url, include_version):
             if include_version and version is not None:
                 parent_mod["version"] = version
 
-            id_name_pairs.add(json.dumps(parent_mod, sort_keys=True))
+            dep_mods_set.add(json.dumps(parent_mod, sort_keys=True))
 
             # Search for the "dependencies" information
             dependencies = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('dependencies', [])
@@ -58,7 +58,7 @@ def main(url, include_version):
                 if include_version and dep_version is not None:
                     dep_mod["version"] = dep_version
 
-                id_name_pairs.add(json.dumps(dep_mod, sort_keys=True))
+                dep_mods_set.add(json.dumps(dep_mod, sort_keys=True))
 
                 dep_dependencies = dep.get('dependencies', [])
                 for dep_dep in dep_dependencies:
@@ -72,19 +72,42 @@ def main(url, include_version):
                     if include_version and dep_dep_version is not None:
                         dep_dep_mod["version"] = dep_dep_version
 
-                    id_name_pairs.add(json.dumps(dep_dep_mod, sort_keys=True))
+                    dep_mods_set.add(json.dumps(dep_dep_mod, sort_keys=True))
 
             # Output the collection of "id" and "name" pairs as JSON
-            print("Mods list:")
-            print(json.dumps([json.loads(entry) for entry in id_name_pairs], indent=4))
+            output_data = {
+                "bindAddress": "",
+                "bindPort": 2001,
+                "publicAddress": "",
+                "publicPort": 2001,
+                "a2s": {
+                    "address": "0.0.0.0",
+                    "port": 17777
+                },
+                "game": {
+                    "passwordAdmin": "CHANGEME",
+                    "name": "[SERVER] TITLE",
+                    "password": "",
+                    "scenarioId": scenarioId,
+                    "maxPlayers": playerCount,
+                    "visible": True,
+                    "crossPlatform": True,
+                    "supportedPlatforms": ["PLATFORM_PC", "PLATFORM_XBL"],
+                    "gameProperties": {
+                        "serverMaxViewDistance": 2500,
+                        "serverMinGrassDistance": 50,
+                        "networkViewDistance": 1000,
+                        "disableThirdPerson": False,
+                        "fastValidation": True,
+                        "battlEeye": True,
+                        "VONDisableUI": False,
+                        "VONDisableDirectSpeechUI": False
+                    },
+                    "mods": [json.loads(entry) for entry in dep_mods_set]
+                }
+            }
 
-            # Output Scenario ID
-            if scenarioId is not None:
-                print(f"Scenario ID: {scenarioId}")
-            if gameMode is not None:
-                print(f"Game Mode: {gameMode}")
-            if playerCount is not None:
-                print(f"Player Count: {playerCount}")
+            print(json.dumps(output_data, indent=4))
 
         else:
             print("JSON data not found on the page.")
