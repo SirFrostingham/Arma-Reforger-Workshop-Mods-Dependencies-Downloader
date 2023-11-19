@@ -3,6 +3,15 @@ param (
     [switch]$version
 )
 
+function IsDuplicateModId($id) {
+    foreach ($entry in $idNamePairs) {
+        if ($entry["modId"] -eq $id) {
+            return $true
+        }
+    }
+    return $false
+}
+
 if ([string]::IsNullOrEmpty($url)) {
     Write-Host "Please provide a URL as a parameter."
     exit
@@ -52,7 +61,10 @@ if ($match.Success) {
             $depIdNamePair["version"] = $dep.version
         }
 
-        $idNamePairs += $depIdNamePair
+        if (-not (IsDuplicateModId $depAsset.id)) {
+            $idNamePairs += $depIdNamePair
+        }
+
         $subDependencies = $dep.dependencies
         if ($subDependencies) {
             foreach ($subDep in $subDependencies) {
@@ -66,8 +78,7 @@ if ($match.Success) {
                     $subDepIdNamePair["version"] = $subDep.version
                 }
 
-                # Check for duplicate "modId" before adding to the collection
-                if (-not $idNamePairs.modId.Contains($subDepAsset.id)) {
+                if (-not (IsDuplicateModId $subDepAsset.id)) {
                     $idNamePairs += $subDepIdNamePair
                 }
             }
