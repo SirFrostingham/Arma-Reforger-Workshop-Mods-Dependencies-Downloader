@@ -10,52 +10,31 @@ Powershell Instructions:
 2. Download/copy the `modsDownloader.ps1` script to any directory.
 3. Run: cmd
 4. Run: powershell
-5. Run script:
+5. **Script usages**:
    - Exclude mod version detail:
-        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype"`
+        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes"`
    - Include mod version detail:
-        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype" version true`
+        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true`
+   - Output to text file (be sure to delete any previous, since this will append):
+        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true` >> test.json
 
 Python Instructions:
 1. Prerequisite: Install python: If in Windows, suggest install chocolatey (https://chocolatey.org/install -> run powershell script under "Now run the following command"), then install python (choco install python3).
 2. Download/copy the `modsDownloader.py` script to any directory.
-3. Run script:
+3. **Script usages**:
     - Exclude mod version detail:
-       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype`
+       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes`
     - Include mod verison detail:
-       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5CAB24EF8A549922-ReforgedWastelandPrototype --version`
+       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version`
+    - Include mod verison detail (be sure to delete any previous, since this will append):
+       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version` >> test.json
 
 Result:
-It will output the main mod + all dependencies, so you can plug it into your server's mods object. It also outputs the scenario id to add to your config.json file.
+It will output the content from the website (main mod + all mod dependencies, Scenario ID, and player count as maxPlayers) to a json format the game can use.
 
-Tool output screenshot (both script outputs are exactly the same):
+Tool example screenshot (see Powershell or Python usages above - both scripts output the same exact way):
 
-![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/0c3157de-1a75-496c-8a47-53cbe134b2f6)
-
-
-Plug in the data to your server's config.json:
-
-![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/5b22c62c-5085-432d-b799-5831fdc58715)
+![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/ff8c9b57-8fd2-48cf-aa13-056d97edfd44)
 
 
-Troubleshooting:
-If you add the json to your server config.json and the server does not start, look for errors:
-```
-INIT         : Creating game instance(ArmaReforgerScripted), version 0.9.9.104 built 2023-09-22 2:16:53 UTC.
-Loading dedicated server config.
- BACKEND      : Server config loaded.
- BACKEND      : JSON Schema Validation:
-  BACKEND      : JSON is Valid
- RESOURCES    : GetResourceObject @"{9F7BA3BBF4B38A98}Missions/WastelandHeader.conf"
-  RESOURCES (E): Failed to open
- RESOURCES (E): MissionHeader::ReadMissionHeader cannot load the resource 'Missions/WastelandHeader.conf'!
-ENGINE       : Game successfully created.
-InputManager user settings load from profile @"InputUserSettings.conf"
- DEFAULT   (W): Loading input settings from legacy file, which will be soon unsupported
-NETWORK      : Starting dedicated server using command line args.
-BACKEND   (E): Http Error apiCode="ResourceNotFoundError", message="Asset '5AF76BA0142BCDDE' not found"
-```
-
-At the time of writing this, the mod `5AF76BA0142BCDDE` (Vergys Military Gear) returns a 404 ResourceNotFoundError, which means a dependency of the "ReforgedWastelandPrototype" workshop item is missing.
-
-Enjoy.
+Enjoy!
