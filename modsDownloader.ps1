@@ -85,23 +85,46 @@ if ($match.Success) {
         }
     }
 
-    # Output the collection of "id" and "name" pairs
-    Write-Host "Mods list:"
-    $idNamePairs | ConvertTo-Json
-
-    # Output scenario details
-    $scenarioId = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameId
-    Write-Host "Scenario ID: $scenarioId"
-    $gameMode = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameMode
-    Write-Host "Game mode: $gameMode"
-    $playerCount = $jsonData.props.pageProps.assetVersionDetail.scenarios.playerCount
-    Write-Host "Player count: $playerCount"
-
-    # Output version if provided
-    if ($version -and $jsonData.props.pageProps.assetVersionDetail.version) {
-        $version = $jsonData.props.pageProps.assetVersionDetail.version
-        Write-Host "Version: $version"
+    # Create an ordered hashtable for the JSON template
+    $jsonTemplate = [ordered]@{
+        bindAddress = ""
+        bindPort = 2001
+        publicAddress = ""
+        publicPort = 2001
+        a2s = [ordered]@{
+            address = "0.0.0.0"
+            port = 17777
+        }
+        game = [ordered]@{
+            passwordAdmin = "CHANGEME"
+            name = "[SERVER] TITLE"
+            password = ""
+            scenarioId = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameId
+            maxPlayers = $jsonData.props.pageProps.assetVersionDetail.scenarios.playerCount
+            visible = $true
+            crossPlatform = $true
+            supportedPlatforms = @("PLATFORM_PC", "PLATFORM_XBL")
+            gameProperties = [ordered]@{
+                serverMaxViewDistance = 2500
+                serverMinGrassDistance = 50
+                networkViewDistance = 1000
+                disableThirdPerson = $false
+                fastValidation = $true
+                battlEye = $true
+                VONDisableUI = $false
+                VONDisableDirectSpeechUI = $false
+            }
+            mods = @(foreach ($mod in $idNamePairs) {
+                [ordered]@{
+                    modId = $mod.modId
+                    name = $mod.name
+                }
+            })
+        }
     }
+
+    # Convert the ordered hashtable to JSON and output
+    $jsonTemplate | ConvertTo-Json -Depth 10
 } else {
     Write-Host "JSON data not found on the page."
 }
