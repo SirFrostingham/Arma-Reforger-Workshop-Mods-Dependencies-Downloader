@@ -53,6 +53,25 @@ if ($match.Success) {
         }
 
         $idNamePairs += $depIdNamePair
+        $subDependencies = $dep.dependencies
+        if ($subDependencies) {
+            foreach ($subDep in $subDependencies) {
+                $subDepAsset = $subDep.asset
+                $subDepIdNamePair = @{
+                    "modId" = $subDepAsset.id
+                    "name" = $subDepAsset.name
+                }
+
+                if ($version -and $subDep.version) {
+                    $subDepIdNamePair["version"] = $subDep.version
+                }
+
+                # Check for duplicate "modId" before adding to the collection
+                if (-not $idNamePairs.modId.Contains($subDepAsset.id)) {
+                    $idNamePairs += $subDepIdNamePair
+                }
+            }
+        }
     }
 
     # Output the collection of "id" and "name" pairs
