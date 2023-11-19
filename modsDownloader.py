@@ -26,19 +26,19 @@ def main(url, include_version):
             asset = json_data['props']['pageProps']['asset']
 
             # Build a collection of "id" and "name" pairs
-            id_name_pairs = []
+            id_name_pairs = set()
 
             # Add parent mod to the collection
             parent_mod = {
                 "modId": asset['id'],
                 "name": asset['name']
             }
-            
+
             version = json_data['props']['pageProps']['asset']['currentVersionNumber']
             if include_version and version is not None:
                 parent_mod["version"] = version
-            
-            id_name_pairs.append(parent_mod)
+
+            id_name_pairs.add(json.dumps(parent_mod, sort_keys=True))
 
             # Search for the "dependencies" information
             dependencies = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('dependencies', [])
@@ -58,11 +58,25 @@ def main(url, include_version):
                 if include_version and dep_version is not None:
                     dep_mod["version"] = dep_version
 
-                id_name_pairs.append(dep_mod)
+                id_name_pairs.add(json.dumps(dep_mod, sort_keys=True))
+
+                dep_dependencies = dep.get('dependencies', [])
+                for dep_dep in dep_dependencies:
+                    dep_dep_asset = dep_dep['asset']
+                    dep_dep_mod = {
+                        "modId": dep_dep_asset['id'],
+                        "name": dep_dep_asset['name']
+                    }
+
+                    dep_dep_version = dep_dep.get('version', None)
+                    if include_version and dep_dep_version is not None:
+                        dep_dep_mod["version"] = dep_dep_version
+
+                    id_name_pairs.add(json.dumps(dep_dep_mod, sort_keys=True))
 
             # Output the collection of "id" and "name" pairs as JSON
             print("Mods list:")
-            print(json.dumps(id_name_pairs, indent=4))
+            print(json.dumps([json.loads(entry) for entry in id_name_pairs], indent=4))
 
             # Output Scenario ID
             if scenarioId is not None:
