@@ -16,7 +16,7 @@ This simple project is designed to take the Arma Reforger workshop website and o
    - Include mod version detail:
         `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true`
    - Output to text file (be sure to delete any previous, since this will append):
-        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true` >> test.json
+        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true >> test.json`
 
 # Python Instructions
 1. Prerequisite: Install python: If in Windows, suggest install chocolatey (https://chocolatey.org/install -> run powershell script under "Now run the following command"), then install python (choco install python3).
@@ -27,7 +27,7 @@ This simple project is designed to take the Arma Reforger workshop website and o
     - Include mod verison detail:
        `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version`
     - Include mod verison detail (be sure to delete any previous, since this will append):
-       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version` >> test.json
+       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version >> test.json`
 
 # Results
 Either script will output the content from the website url (main mod + all mod dependencies, Scenario ID, and player count as maxPlayers) to a json format the game can use.
@@ -36,5 +36,10 @@ Tool example screenshot (see Powershell or Python usages above - both scripts ou
 
 ![image](https://github.com/SirFrostingham/Arma-Reforger-Workshop-Mods-Dependencies-Downloader/assets/4725943/ff8c9b57-8fd2-48cf-aa13-056d97edfd44)
 
+That's it! Plug this json into your Arma Reforger server and it will work.
+
+If you output the file with `>> test.json` (see usages above), it can be used like this:
+
+`start "ArmaReforger" /wait /high "ArmaReforgerServer.exe" -maxFPS 60 -config ".\test.json" -profile test`
 
 Enjoy!
