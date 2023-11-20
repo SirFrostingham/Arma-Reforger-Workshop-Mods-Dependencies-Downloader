@@ -115,10 +115,16 @@ if ($match.Success) {
                 VONDisableDirectSpeechUI = $false
             }
             mods = @(foreach ($mod in $idNamePairs) {
-                [ordered]@{
+                $modEntry = [ordered]@{
                     modId = $mod.modId
                     name = $mod.name
                 }
+            
+                if ($version -and $mod.version) {
+                    $modEntry["version"] = $mod.version
+                }
+            
+                $modEntry
             })
         }
     }
