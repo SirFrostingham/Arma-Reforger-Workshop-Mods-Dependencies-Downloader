@@ -74,6 +74,20 @@ def main(url, include_version):
 
                     dep_mods_set.add(json.dumps(dep_dep_mod, sort_keys=True))
 
+                    dep_dep_dependencies = dep_dep.get('dependencies', [])
+                    for dep_dep_dep in dep_dep_dependencies:
+                        dep_dep_dep_asset = dep_dep_dep['asset']
+                        dep_dep_dep_mod = {
+                            "modId": dep_dep_dep_asset['id'],
+                            "name": dep_dep_dep_asset['name']
+                        }
+
+                        dep_dep_dep_version = dep_dep_dep.get('version', None)
+                        if include_version and dep_dep_dep_version is not None:
+                            dep_dep_dep_mod["version"] = dep_dep_dep_version
+
+                        dep_mods_set.add(json.dumps(dep_dep_dep_mod, sort_keys=True))
+
             # Output the collection of "id" and "name" pairs as JSON
             output_data = {
                 "bindAddress": "",
