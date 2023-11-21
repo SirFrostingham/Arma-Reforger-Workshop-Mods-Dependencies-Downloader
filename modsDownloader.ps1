@@ -81,6 +81,25 @@ if ($match.Success) {
                 if (-not (IsDuplicateModId $subDepAsset.id)) {
                     $idNamePairs += $subDepIdNamePair
                 }
+
+                $subSubDependencies = $subDep.dependencies
+                if ($subSubDependencies) {
+                    foreach ($subSubDep in $subSubDependencies) {
+                        $subSubDepAsset = $subSubDep.asset
+                        $subSubDepIdNamePair = @{
+                            "modId" = $subSubDepAsset.id
+                            "name" = $subSubDepAsset.name
+                        }
+        
+                        if ($version -and $subSubDep.version) {
+                            $subSubDepIdNamePair["version"] = $subSubDep.version
+                        }
+        
+                        if (-not (IsDuplicateModId $subSubDepAsset.id)) {
+                            $idNamePairs += $subSubDepIdNamePair
+                        }
+                    }
+                }
             }
         }
     }
