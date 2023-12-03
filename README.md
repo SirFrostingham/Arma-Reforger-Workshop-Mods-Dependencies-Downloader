@@ -42,4 +42,8 @@ If you output the file with `>> test.json` (see usages above), it can be used li
 
 `start "ArmaReforger" /wait /high "ArmaReforgerServer.exe" -maxFPS 60 -config ".\test.json" -profile test`
 
+# Troubleshooting
+- If your server starts and is listed in-game with 999+ ping...
+  - In your game server's `config.json`, or as shown above `test.json`, change `publicAddress` value to your public IP address.
+
 Enjoy!
