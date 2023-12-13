@@ -120,8 +120,19 @@ if ($match.Success) {
             $modEntry
         }
 
-        # Convert each mod entry to JSON and output without brackets
-        $modsArray | ForEach-Object { $_ | ConvertTo-Json -Depth 10 -Compress }
+        # Iterate through the mods array
+        for ($i = 0; $i -lt $modsArray.Count; $i++) {
+            $modEntry = $modsArray[$i] | ConvertTo-Json -Depth 10 -Compress
+
+            # Check if it's the last entry
+            if ($i -lt ($modsArray.Count - 1)) {
+                # Add a comma at the end
+                $modEntry += ","
+            }
+
+            # Output the mod entry
+            Write-Host $modEntry
+        }
     } else {
         # Create an ordered hashtable for the JSON template
         $jsonTemplate = [ordered]@{
