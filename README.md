@@ -14,9 +14,11 @@ This simple project is designed to take the Arma Reforger workshop website and o
    - Exclude mod version detail:
         `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes"`
    - Include mod version detail:
-        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true`
+        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" -version true`
+   - Output only mods array:
+        `. '.\modsDownloader.ps1' -onlyMods -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes"`
    - Output to text file (be sure to delete any previous, since this will append):
-        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" version true >> test.json`
+        `. '.\modsDownloader.ps1' -url "https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes" -version true >> test.json`
 
 # Python Instructions
 1. Prerequisite: Install python: If in Windows, suggest install chocolatey (https://chocolatey.org/install -> run powershell script under "Now run the following command"), then install python (choco install python3).
@@ -26,6 +28,8 @@ This simple project is designed to take the Arma Reforger workshop website and o
        `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes`
     - Include mod verison detail:
        `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version`
+    - Output only mods array:
+       `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --onlyMods`
     - Include mod verison detail (be sure to delete any previous, since this will append):
        `python .\modsDownloader.py https://reforger.armaplatform.com/workshop/5EE637B626221E3F-Conflict2032Utes --version >> test.json`
 
