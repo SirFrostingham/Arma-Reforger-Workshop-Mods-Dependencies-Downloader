@@ -1,6 +1,7 @@
 param (
     [string]$url,
-    [switch]$version
+    [switch]$version,
+    [switch]$onlyMods
 )
 
 function IsDuplicateModId($id) {
@@ -104,52 +105,70 @@ if ($match.Success) {
         }
     }
 
-    # Create an ordered hashtable for the JSON template
-    $jsonTemplate = [ordered]@{
-        bindAddress = ""
-        bindPort = 2001
-        publicAddress = ""
-        publicPort = 2001
-        a2s = [ordered]@{
-            address = "0.0.0.0"
-            port = 17777
-        }
-        game = [ordered]@{
-            passwordAdmin = "CHANGEME"
-            name = "[SERVER] TITLE"
-            password = ""
-            scenarioId = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameId
-            maxPlayers = $jsonData.props.pageProps.assetVersionDetail.scenarios.playerCount
-            visible = $true
-            crossPlatform = $true
-            supportedPlatforms = @("PLATFORM_PC", "PLATFORM_XBL")
-            gameProperties = [ordered]@{
-                serverMaxViewDistance = 2500
-                serverMinGrassDistance = 50
-                networkViewDistance = 1000
-                disableThirdPerson = $false
-                fastValidation = $true
-                battlEye = $true
-                VONDisableUI = $false
-                VONDisableDirectSpeechUI = $false
+    # Output only the mods array if $onlyMods is specified
+    if ($onlyMods) {
+        $modsArray = @(foreach ($mod in $idNamePairs) {
+            $modEntry = [ordered]@{
+                modId = $mod.modId
+                name = $mod.name
             }
-            mods = @(foreach ($mod in $idNamePairs) {
-                $modEntry = [ordered]@{
-                    modId = $mod.modId
-                    name = $mod.name
-                }
-            
-                if ($version -and $mod.version) {
-                    $modEntry["version"] = $mod.version
-                }
-            
-                $modEntry
-            })
-        }
-    }
+        
+            if ($version -and $mod.version) {
+                $modEntry["version"] = $mod.version
+            }
+        
+            $modEntry
+        })
 
-    # Convert the ordered hashtable to JSON and output
-    $jsonTemplate | ConvertTo-Json -Depth 10
+        $modsArray | ConvertTo-Json -Depth 10
+    } else {
+        # Create an ordered hashtable for the JSON template
+        $jsonTemplate = [ordered]@{
+            bindAddress = ""
+            bindPort = 2001
+            publicAddress = ""
+            publicPort = 2001
+            a2s = [ordered]@{
+                address = "0.0.0.0"
+                port = 17777
+            }
+            game = [ordered]@{
+                passwordAdmin = "CHANGEME"
+                name = "[SERVER] TITLE"
+                password = ""
+                scenarioId = $jsonData.props.pageProps.assetVersionDetail.scenarios.gameId
+                maxPlayers = $jsonData.props.pageProps.assetVersionDetail.scenarios.playerCount
+                visible = $true
+                crossPlatform = $true
+                supportedPlatforms = @("PLATFORM_PC", "PLATFORM_XBL")
+                gameProperties = [ordered]@{
+                    serverMaxViewDistance = 2500
+                    serverMinGrassDistance = 50
+                    networkViewDistance = 1000
+                    disableThirdPerson = $false
+                    fastValidation = $true
+                    battlEye = $true
+                    VONDisableUI = $false
+                    VONDisableDirectSpeechUI = $false
+                }
+                mods = @(foreach ($mod in $idNamePairs) {
+                    $modEntry = [ordered]@{
+                        modId = $mod.modId
+                        name = $mod.name
+                    }
+                
+                    if ($version -and $mod.version) {
+                        $modEntry["version"] = $mod.version
+                    }
+                
+                    $modEntry
+                })
+            }
+        }
+
+        # Convert the ordered hashtable to JSON and output
+        $jsonTemplate | ConvertTo-Json -Depth 10
+    }
 } else {
     Write-Host "JSON data not found on the page."
 }
