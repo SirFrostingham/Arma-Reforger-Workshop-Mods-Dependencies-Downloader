@@ -107,8 +107,8 @@ if ($match.Success) {
 
     # Output only the mods array if $onlyMods is specified
     if ($onlyMods) {
-        $modsArray = @(foreach ($mod in $idNamePairs) {
-            $modEntry = [ordered]@{
+        $modsArray = foreach ($mod in $idNamePairs) {
+            $modEntry = @{
                 modId = $mod.modId
                 name = $mod.name
             }
@@ -118,9 +118,10 @@ if ($match.Success) {
             }
         
             $modEntry
-        })
+        }
 
-        $modsArray | ConvertTo-Json -Depth 10
+        # Convert each mod entry to JSON and output without brackets
+        $modsArray | ForEach-Object { $_ | ConvertTo-Json -Depth 10 -Compress }
     } else {
         # Create an ordered hashtable for the JSON template
         $jsonTemplate = [ordered]@{
@@ -151,8 +152,8 @@ if ($match.Success) {
                     VONDisableUI = $false
                     VONDisableDirectSpeechUI = $false
                 }
-                mods = @(foreach ($mod in $idNamePairs) {
-                    $modEntry = [ordered]@{
+                mods = foreach ($mod in $idNamePairs) {
+                    $modEntry = @{
                         modId = $mod.modId
                         name = $mod.name
                     }
@@ -162,7 +163,7 @@ if ($match.Success) {
                     }
                 
                     $modEntry
-                })
+                }
             }
         }
 
