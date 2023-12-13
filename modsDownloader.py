@@ -4,7 +4,7 @@ import json
 import re
 import sys
 
-def main(url, include_version):
+def main(url, include_version, only_mods):
     if not url:
         print("Please provide a URL as an argument.")
         sys.exit(1)
@@ -43,7 +43,6 @@ def main(url, include_version):
             # Search for the "dependencies" information
             dependencies = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('dependencies', [])
             scenarioId = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('scenarios', [{}])[0].get('gameId', None)
-            gameMode = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('scenarios', [{}])[0].get('gameMode', None)
             playerCount = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('scenarios', [{}])[0].get('playerCount', None)
 
             # Dependencies: Build a collection of "id" and "name" pairs
@@ -88,40 +87,45 @@ def main(url, include_version):
 
                         dep_mods_set.add(json.dumps(dep_dep_dep_mod, sort_keys=True))
 
-            # Output the collection of "id" and "name" pairs as JSON
-            output_data = {
-                "bindAddress": "",
-                "bindPort": 2001,
-                "publicAddress": "",
-                "publicPort": 2001,
-                "a2s": {
-                    "address": "0.0.0.0",
-                    "port": 17777
-                },
-                "game": {
-                    "passwordAdmin": "CHANGEME",
-                    "name": "[SERVER] TITLE",
-                    "password": "",
-                    "scenarioId": scenarioId,
-                    "maxPlayers": playerCount,
-                    "visible": True,
-                    "crossPlatform": True,
-                    "supportedPlatforms": ["PLATFORM_PC", "PLATFORM_XBL"],
-                    "gameProperties": {
-                        "serverMaxViewDistance": 2500,
-                        "serverMinGrassDistance": 50,
-                        "networkViewDistance": 1000,
-                        "disableThirdPerson": False,
-                        "fastValidation": True,
-                        "battlEeye": True,
-                        "VONDisableUI": False,
-                        "VONDisableDirectSpeechUI": False
+            # Output only the mods array if only_mods is specified
+            if only_mods:
+                mods_array = [json.loads(entry) for entry in dep_mods_set]
+                print(json.dumps(mods_array, indent=4))
+            else:
+                # Output the full JSON structure
+                output_data = {
+                    "bindAddress": "",
+                    "bindPort": 2001,
+                    "publicAddress": "[EXTERNAL_SCRIPT_REPLACES_THIS]",
+                    "publicPort": 2001,
+                    "a2s": {
+                        "address": "0.0.0.0",
+                        "port": 17777
                     },
-                    "mods": [json.loads(entry) for entry in dep_mods_set]
+                    "game": {
+                        "passwordAdmin": "CHANGEME",
+                        "name": "[SERVER] TITLE",
+                        "password": "",
+                        "scenarioId": scenarioId,
+                        "maxPlayers": playerCount,
+                        "visible": True,
+                        "crossPlatform": True,
+                        "supportedPlatforms": ["PLATFORM_PC", "PLATFORM_XBL"],
+                        "gameProperties": {
+                            "serverMaxViewDistance": 2500,
+                            "serverMinGrassDistance": 50,
+                            "networkViewDistance": 1000,
+                            "disableThirdPerson": False,
+                            "fastValidation": True,
+                            "battlEeye": True,
+                            "VONDisableUI": False,
+                            "VONDisableDirectSpeechUI": False
+                        },
+                        "mods": [json.loads(entry) for entry in dep_mods_set]
+                    }
                 }
-            }
 
-            print(json.dumps(output_data, indent=4))
+                print(json.dumps(output_data, indent=4))
 
         else:
             print("JSON data not found on the page.")
@@ -132,5 +136,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract JSON data from a website.")
     parser.add_argument("url", type=str, help="The URL of the website")
     parser.add_argument("--version", action="store_true", help="Include version information")
+    parser.add_argument("--onlyMods", action="store_true", help="Output only the mods array")
     args = parser.parse_args()
-    main(args.url, args.version)
+    main(args.url, args.version, args.onlyMods)
