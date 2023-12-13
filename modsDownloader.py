@@ -90,7 +90,7 @@ def main(url, include_version, only_mods):
             # Output only the mods array if only_mods is specified
             if only_mods:
                 mods_array = [json.loads(entry) for entry in dep_mods_set]
-                print(json.dumps(mods_array, indent=4))
+                print(json.dumps(mods_array, indent=4, separators=(',', ': '), ensure_ascii=False)[1:-1])
             else:
                 # Output the full JSON structure
                 output_data = {
@@ -125,7 +125,7 @@ def main(url, include_version, only_mods):
                     }
                 }
 
-                print(json.dumps(output_data, indent=4))
+                print(json.dumps(output_data, indent=4, separators=(',', ': '), ensure_ascii=False))
 
         else:
             print("JSON data not found on the page.")
