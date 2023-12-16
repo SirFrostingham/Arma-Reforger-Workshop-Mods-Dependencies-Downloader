@@ -42,8 +42,10 @@ def main(url, include_version, only_mods):
 
             # Search for the "dependencies" information
             dependencies = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('dependencies', [])
-            scenarioId = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('scenarios', [{}])[0].get('gameId', None)
-            playerCount = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('scenarios', [{}])[0].get('playerCount', None)
+            scenarios = json_data['props']['pageProps'].get('assetVersionDetail', {}).get('scenarios', [])
+            scenarioId = scenarios[0]['gameId'] if scenarios and scenarios[0] else None
+            playerCount = scenarios[0]['playerCount'] if scenarios and 'playerCount' in scenarios[0] else None
+
 
             # Dependencies: Build a collection of "id" and "name" pairs
             for dep in dependencies:
